@@ -37,7 +37,7 @@
         var fileIndex = {} , requestMap = {} , errorCode, errorFileIndex = {};
         inputEl.on('change', function (event) {
             event.stopPropagation();
-            var inputHTMLEl = inputEl[0];
+            var inputHTMLEl = event.target;
             var files = inputHTMLEl.files;
             _this.errorFileIndex = {}; //reseting
             for (var i = 0, len = files.length; i < len; i++) {
@@ -68,6 +68,7 @@
             inputEl.click();
         });
 
+        this.input = inputEl;
         this.fileIdList = fileIdList;
         this.fileIndex = fileIndex;
         this.requestMap = requestMap;
@@ -104,7 +105,6 @@
          * @returns {Number}
          */
         validate: function (file) {
-            console.log(file);
             var typeError = this.validateFileType(file) , errorCode = 0;
             if (typeError.error) {
                 return typeError.errorCode;
